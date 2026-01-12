@@ -1,9 +1,4 @@
-/*
-  Topic: Experiment 1.1 - Library Management System
-  Description: Implementation of DDL, DML, and DCL operations.
-*/
 
--- 1. DDL: Table Creation
 CREATE TABLE Books (
     book_id INT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -29,7 +24,7 @@ CREATE TABLE Issue_Records (
     CONSTRAINT chk_dates CHECK (return_date >= issue_date)
 );
 
--- 2. DML: Data Operations
+
 INSERT INTO Books (book_id, title, author, total_copies, available_copies) 
 VALUES (101, 'The Great Gatsby', 'F. Scott Fitzgerald', 5, 5),
        (102, '1984', 'George Orwell', 10, 10);
@@ -37,11 +32,11 @@ VALUES (101, 'The Great Gatsby', 'F. Scott Fitzgerald', 5, 5),
 INSERT INTO Library_Users (user_id, name, email) 
 VALUES (501, 'Alice Vance', 'alice@email.com');
 
--- Simulating a book issue
+
 INSERT INTO Issue_Records (book_id, user_id, issue_date) VALUES (101, 501, CURRENT_DATE);
 UPDATE Books SET available_copies = available_copies - 1 WHERE book_id = 101;
 
--- 3. DCL: Security Roles
+
 CREATE ROLE librarian WITH LOGIN PASSWORD 'LibPass123';
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO librarian;
 REVOKE DELETE ON Books FROM librarian;
